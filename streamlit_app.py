@@ -94,3 +94,187 @@ def show_home():
     </div>""", unsafe_allow_html=True)
     st.write("")
     c1, c2, c3 = st.columns(3)
+    c1.markdown("### 🌱 Hạt tuyển chọn\nNguồn hạt được chọn lọc, chú trọng hương vị.")
+    c2.markdown("### ☕ Pha mới mỗi ly\nTập trung vào trải nghiệm thơm ngon, chỉn chu.")
+    c3.markdown("### 🛵 Giao đến tận nơi\nĐiền thông tin nhận hàng khi đặt món.")
+    st.write("")
+    if st.button("Khám phá thực đơn  →", type="primary"):
+        st.session_state.page = "shop"
+        st.rerun()
+    st.markdown("---")
+    st.markdown("#### Món được yêu thích")
+    picks = [PRODUCTS[0], PRODUCTS[2], PRODUCTS[6]]
+    cols = st.columns(3)
+    for col, p in zip(cols, picks):
+        with col:
+            st.image(p["image"], use_container_width=True)
+            st.markdown(f"**{p['name']}** · {money(p['price'])}")
+            st.caption(p["subtitle"])
+
+def show_shop():
+    st.markdown("# Thực đơn")
+    st.markdown("Chọn món yêu thích — có thể điều chỉnh số lượng trong giỏ hàng.")
+    search = st.text_input("🔎 Tìm món", placeholder="Ví dụ: latte, cold brew…")
+    products = [p for p in PRODUCTS if search.lower() in p["name"].lower()] if search else PRODUCTS
+    for start in range(0, len(products), 3):
+        cols = st.columns(3, gap="medium")
+        for col, p in zip(cols, products[start:start+3]):
+            with col:
+                st.markdown('<div class="product">', unsafe_allow_html=True)
+                st.image(p["image"], use_container_width=True)
+                st.markdown(f'<div class="tag">{p["tag"]}</div><div class="product-name">{p["name"]}</div><div class="product-sub">{p["subtitle"]}</div><div class="price">{money(p["price"])}</div>', unsafe_allow_html=True)
+                qty = st.number_input("Số lượng", min_value=0, max_value=30, value=st.session_state.cart.get(p["id"], 0), key=f"qty_{p['id']}")
+                if st.button("Thêm vào giỏ", key=f"add_{p['id']}", use_container_width=True):
+                    if qty:
+                        st.session_state.cart[p["id"]] = int(qty)
+                    else:
+                        st.session_state.cart.pop(p["id"], None)
+                    st.toast(f"Đã cập nhật {p['name']} trong giỏ")
+                st.markdown('</div>', unsafe_allow_html=True)
+    st.write("")
+    if st.button("Xem giỏ hàng →"):
+        st.session_state.page = "cart"
+        st.rerun()
+
+def cart_lines():
+    return [(p, int(st.session_state.cart.get(p["id"], 0))) for p in PRODUCTS if int(st.session_state.cart.get(p["id"], 0)) > 0]
+
+def show_cart():
+    st.markdown("# Giỏ hàng & thanh toán")
+    lines = cart_lines()
+    if not lines:
+        st.info("Giỏ hàng đang trống. Hãy chọn vài món từ thực đơn nhé.")
+        if st.button("Đến thực đơn"):
+            st.session_state.page = "shop"
+            st.rerun()
+        return
+    for p, qty in lines:
+        row = st.columns([2.5, 1, 1, 1])
+        row[0].markdown(f"**{p['name']}**  \n{money(p['price'])}/ly")
+        row[1].write(f"× {qty}")
+        row[2].markdown(f"**{money(p['price'] * qty)}**")
+        with row[3]:
+            if st.button("Bỏ", key=f"remove_{p['id']}"):
+                st.session_state.cart.pop(p["id"], None)
+                st.rerun()
+    subtotal = sum(p["price"] * qty for p, qty in lines)
+    st.divider()
+    a, b = st.columns([2, 1])
+    with b:
+        st.markdown(f"**Tạm tính**  \n# {money(subtotal)}")
+        st.caption("Phí giao hàng, thuế và típ (nếu có) sẽ được xác nhận theo chính sách cửa hàng.")
+    st.markdown("### Thông tin nhận hàng")
+    with st.form("checkout_form"):
+        name = st.text_input("Tên khách hàng *")
+        address = st.text_area("Địa chỉ giao hàng *", placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành")
+        contact = st.text_input("Số điện thoại hoặc Email liên lạc *")
+        payment = st.radio("Phương thức thanh toán", ["Thanh toán khi nhận hàng (COD)", "Chuyển khoản / thanh toán trực tuyến (demo)"], index=0)
+        tip = st.selectbox("Típ cho nhân viên (không bắt buộc)", ["Không", "10.000₫", "20.000₫", "Khác"])
+        tip_value = {"Không": 0, "10.000₫": 10000, "20.000₫": 20000, "Khác": 0}[tip]
+        if tip == "Khác":
+            tip_value = st.number_input("Số tiền típ (₫)", min_value=0, max_value=1000000, step=5000, value=0)
+        agreed = st.checkbox("Tôi xác nhận thông tin đơn hàng là chính xác.")
+        submitted = st.form_submit_button("Đặt hàng", type="primary", use_container_width=True)
+    if submitted:
+        if not name.strip() or not address.strip() or not contact.strip():
+            st.error("Vui lòng điền đủ tên, địa chỉ và thông tin liên lạc.")
+        elif not agreed:
+            st.error("Vui lòng xác nhận thông tin đơn hàng.")
+        else:
+            total = subtotal + int(tip_value)
+            order = {
+                "order_id": datetime.now().strftime("MC%y%m%d%H%M%S"),
+                "created_at": datetime.now().isoformat(timespec="seconds"),
+                "customer": name.strip(),
+                "address": address.strip(),
+                "contact": contact.strip(),
+                "payment_method": payment,
+                "payment_status": "Chờ thanh toán khi nhận" if payment.startswith("Thanh toán khi") else "Chưa thanh toán — demo",
+                "items": [{"name": p["name"], "quantity": qty, "unit_price": p["price"], "line_total": p["price"] * qty} for p, qty in lines],
+                "subtotal": subtotal,
+                "tip": int(tip_value),
+                "total": total,
+                "status": "Mới nhận",
+            }
+            orders = load_orders()
+            orders.append(order)
+            save_orders(orders)
+            st.session_state.cart = {}
+            st.session_state.order_notice = order["order_id"]
+            st.session_state.page = "confirmation"
+            st.rerun()
+
+def show_confirmation():
+    st.success("Đã ghi nhận đơn hàng!")
+    st.markdown("# Cảm ơn bạn đã chọn Mộc Café ☕")
+    st.markdown(f"Mã đơn hàng: **{st.session_state.order_notice}**")
+    st.info("Đơn hàng đã được lưu trên máy chủ ứng dụng để admin xử lý. Nếu chọn phương thức online demo, đây chưa phải giao dịch thanh toán thật.")
+    if st.button("Về trang chủ"):
+        st.session_state.page = "home"
+        st.rerun()
+
+def show_admin():
+    st.markdown("# Khu vực quản trị")
+    if not st.session_state.admin_ok:
+        st.markdown("Đăng nhập để xem và xử lý đơn hàng.")
+        with st.form("admin_login"):
+            user = st.text_input("Tài khoản")
+            password = st.text_input("Mật khẩu", type="password")
+            submit = st.form_submit_button("Đăng nhập", type="primary")
+        if submit:
+            valid = hmac.compare_digest(user, ADMIN_USER) and hmac.compare_digest(password, ADMIN_PASSWORD)
+            if valid:
+                st.session_state.admin_ok = True
+                st.rerun()
+            else:
+                st.error("Thông tin đăng nhập không chính xác.")
+        st.caption("Thiết lập COFFEE_ADMIN_USER và COFFEE_ADMIN_PASSWORD trong secrets/environment trước khi triển khai công khai.")
+        return
+    orders = load_orders()
+    header = st.columns([3, 1])
+    header[0].markdown(f"### Đơn hàng ({len(orders)})")
+    with header[1]:
+        if st.button("Đăng xuất"):
+            st.session_state.admin_ok = False
+            st.rerun()
+    if not orders:
+        st.info("Chưa có đơn hàng nào.")
+        return
+    new_first = list(reversed(orders))
+    statuses = ["Mới nhận", "Đang chuẩn bị", "Đang giao", "Hoàn tất", "Đã hủy"]
+    for order in new_first:
+        with st.expander(f"{order['order_id']} · {order['customer']} · {money(order['total'])} · {order['status']}", expanded=False):
+            st.write(f"**Thời gian:** {order['created_at']}")
+            st.write(f"**Khách hàng:** {order['customer']}")
+            st.write(f"**Địa chỉ:** {order['address']}")
+            st.write(f"**Liên hệ:** {order['contact']}")
+            st.write(f"**Thanh toán:** {order['payment_method']} — {order['payment_status']}")
+            st.write("**Món:**")
+            for item in order["items"]:
+                st.write(f"- {item['name']} × {item['quantity']} — {money(item['line_total'])}")
+            st.write(f"**Tạm tính:** {money(order['subtotal'])} · **Típ:** {money(order['tip'])} · **Tổng:** {money(order['total'])}")
+            index = statuses.index(order["status"]) if order["status"] in statuses else 0
+            new_status = st.selectbox("Cập nhật trạng thái", statuses, index=index, key=f"status_{order['order_id']}")
+            if st.button("Lưu trạng thái", key=f"save_{order['order_id']}"):
+                for stored in orders:
+                    if stored["order_id"] == order["order_id"]:
+                        stored["status"] = new_status
+                save_orders(orders)
+                st.toast("Đã cập nhật đơn hàng.")
+                st.rerun()
+    st.download_button("Tải dữ liệu đơn hàng (JSON)", data=json.dumps(orders, ensure_ascii=False, indent=2), file_name="moc_cafe_orders.json", mime="application/json")
+
+nav()
+if st.session_state.page == "home":
+    show_home()
+elif st.session_state.page == "shop":
+    show_shop()
+elif st.session_state.page == "cart":
+    show_cart()
+elif st.session_state.page == "admin":
+    show_admin()
+elif st.session_state.page == "confirmation":
+    show_confirmation()
+
+st.divider()
+st.markdown('<div class="small-muted">MỘC CAFÉ · Pha bằng sự tử tế. Hình ảnh minh họa tải từ Unsplash.</div>', unsafe_allow_html=True)
