@@ -14,14 +14,20 @@ ADMIN_USER = os.getenv("COFFEE_ADMIN_USER", "AdminCoffeeShop@")
 ADMIN_PASSWORD = os.getenv("COFFEE_ADMIN_PASSWORD", "12345678_")
 
 PRODUCTS = [
-    {"id": "espresso", "name": "Espresso", "subtitle": "Đậm đà • Đánh thức giác quan", "price": 39000, "image": "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=1000&q=85", "tag": "BESTSELLER"},
-    {"id": "americano", "name": "Americano", "subtitle": "Thanh nhẹ • Hậu vị cân bằng", "price": 42000, "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1000&q=85", "tag": "NHẸ NHÀNG"},
-    {"id": "latte", "name": "Café Latte", "subtitle": "Espresso hòa quyện sữa mịn", "price": 49000, "image": "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=1000&q=85", "tag": "ĐƯỢC YÊU THÍCH"},
-    {"id": "cappuccino", "name": "Cappuccino", "subtitle": "Bọt sữa bồng bềnh • Thơm dịu", "price": 49000, "image": "https://images.unsplash.com/photo-1572445420243-3e9b8e7c9b36?auto=format&fit=crop&w=1000&q=85", "tag": "CỔ ĐIỂN"},
-    {"id": "mocha", "name": "Mocha", "subtitle": "Cà phê • Chocolate • Sữa", "price": 55000, "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=1000&q=85", "tag": "NGỌT NGÀO"},
-    {"id": "coldbrew", "name": "Cold Brew", "subtitle": "Ủ lạnh êm dịu • Mát lành", "price": 52000, "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=1000&q=85", "tag": "Ủ LẠNH"},
-    {"id": "vietnamese", "name": "Cà phê sữa đá", "subtitle": "Đậm vị Việt • Ngọt béo hài hòa", "price": 35000, "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1000&q=85", "tag": "VỊ VIỆT"},
-    {"id": "coconut", "name": "Cà phê cốt dừa", "subtitle": "Béo thơm • Mát lạnh", "price": 59000, "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1000&q=85", "tag": "ĐẶC BIỆT"},
+    {"id": "espresso", "name": "Espresso", "subtitle": "Đậm đà • Đánh thức giác quan", "price": 39000, "image": "[GẮN LINK ẢNH]", "tag": "BESTSELLER"},
+    {"id": "americano", "name": "Americano", "subtitle": "Thanh nhẹ • Hậu vị cân bằng", "price": 42000, "image": "[GẮN LINK ẢNH]", "tag": "NHẸ NHÀNG"},
+    {"id": "latte", "name": "Café Latte", "subtitle": "Espresso hòa quyện sữa mịn", "price": 49000, "image": "[GẮN LINK ẢNH]", "tag": "ĐƯỢC YÊU THÍCH"},
+    {"id": "cappuccino", "name": "Cappuccino", "subtitle": "Bọt sữa bồng bềnh • Thơm dịu", "price": 49000, "image": "[GẮN LINK ẢNH]", "tag": "CỔ ĐIỂN"},
+    {"id": "mocha", "name": "Mocha", "subtitle": "Cà phê • Chocolate • Sữa", "price": 55000, "image": "[GẮN LINK ẢNH]", "tag": "NGỌT NGÀO"},
+    {"id": "coldbrew", "name": "Cold Brew", "subtitle": "Ủ lạnh êm dịu • Mát lành", "price": 52000, "image": "[GẮN LINK ẢNH]", "tag": "Ủ LẠNH"},
+    {"id": "vietnamese", "name": "Cà phê sữa đá", "subtitle": "Đậm vị Việt • Ngọt béo hài hòa", "price": 35000, "image": "[GẮN LINK ẢNH]", "tag": "VỊ VIỆT"},
+    {"id": "coconut", "name": "Cà phê cốt dừa", "subtitle": "Béo thơm • Mát lạnh", "price": 59000, "image": "[GẮN LINK ẢNH]", "tag": "ĐẶC BIỆT"},
+    {"id": "milktea", "name": "Trà sữa truyền thống", "subtitle": "Trà thơm • Sữa béo vừa vặn", "price": 42000, "image": "[GẮN LINK ẢNH]", "tag": "TRÀ SỮA"},
+    {"id": "matchamilk", "name": "Trà sữa matcha", "subtitle": "Matcha dịu thơm, hậu vị thanh", "price": 49000, "image": "[GẮN LINK ẢNH]", "tag": "TRÀ SỮA"},
+    {"id": "kumquat", "name": "Trà quýt", "subtitle": "Chua ngọt tươi mát", "price": 39000, "image": "[GẮN LINK ẢNH]", "tag": "TRÀ TRÁI CÂY"},
+    {"id": "tropical", "name": "Trà nhiệt đới", "subtitle": "Hương trái cây nhiệt đới sảng khoái", "price": 45000, "image": "[GẮN LINK ẢNH]", "tag": "TRÀ TRÁI CÂY"},
+    {"id": "peachtea", "name": "Trà đào cam sả", "subtitle": "Thơm dịu • Chua ngọt cân bằng", "price": 45000, "image": "[GẮN LINK ẢNH]", "tag": "ĐƯỢC YÊU THÍCH"},
+    {"id": "lemontea", "name": "Trà chanh mật ong", "subtitle": "Thanh mát • Dịu ngọt", "price": 35000, "image": "[GẮN LINK ẢNH]", "tag": "THANH MÁT"},
 ]
 
 def money(value):
@@ -49,9 +55,9 @@ init_state()
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
 :root { --coffee:#4b2e23; --cream:#fbf6ee; --copper:#bd8055; }
-.stApp { background: #fbf8f2; color: #30251f; font-family:'DM Sans',sans-serif; }
+.stApp { background: #fbf8f2; color: #30251f; font-family:'Be Vietnam Pro',sans-serif; }
 .block-container { max-width: 1240px; padding-top: 1.3rem; padding-bottom: 3rem; }
 h1,h2,h3 { color:#3d281e; }
 .hero { background:linear-gradient(100deg,rgba(36,22,16,.88),rgba(36,22,16,.25)),url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1800&q=90') center/cover; border-radius:24px; padding:4rem 3.5rem; color:#fffaf4; min-height:340px; display:flex; flex-direction:column; justify-content:center; }
@@ -70,10 +76,15 @@ div[data-testid="stMetric"] {background:white;padding:14px;border:1px solid #eee
 hr {border-color:#e9dfd4;}
 .small-muted {color:#786c62;font-size:.85rem;}
 
-.site-nav {background:#f1e8db;border:1px solid #e2d3c0;border-radius:18px;padding:12px 16px;margin:4px 0 20px;}
+.site-nav {background:#e9dcc9;border:1px solid #cdb89c;border-radius:18px;padding:14px 16px;margin:4px 0 24px;box-shadow:0 5px 18px rgba(75,46,35,.07);}
+.site-nav button {min-height:44px;}
+.body-separator {height:1px;background:#d8c7b2;margin:1.2rem 0;}
+.stApp, .stApp p, .stApp label, .stApp [data-testid='stMarkdownContainer'] {color:#30251f;}
+.stTextInput input,.stTextArea textarea,.stNumberInput input {color:#30251f!important;background:#fff!important;}
+.stCaption, small {color:#66584d!important;}
 .nav-brand {font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#4b2e23;}
 .nav-sub {font-size:.78rem;color:#786c62;}
-.site-footer {margin-top:2.5rem;padding:1.2rem 1.4rem;background:#f1e8db;border:1px solid #e2d3c0;border-radius:16px;color:#665344;}
+.site-footer {margin-top:3.2rem;padding:1.4rem 1.6rem;background:#e9dcc9;border:1px solid #cdb89c;border-radius:16px;color:#4c3b30;box-shadow:0 -3px 16px rgba(75,46,35,.04);}
 .tool-hero {background:linear-gradient(110deg,#eee3d2,#f8f3e9);border:1px solid #e3d3bd;border-radius:20px;padding:1.5rem 1.8rem;margin-bottom:1rem;}
 </style>
 """, unsafe_allow_html=True)
@@ -82,7 +93,7 @@ def nav():
     st.markdown('<div class="site-nav">', unsafe_allow_html=True)
     brand, menu = st.columns([2.4, 5.6], vertical_alignment="center")
     with brand:
-        st.markdown('<div class="nav-brand">☕ MỘC CAFÉ</div><div class="nav-sub">Pha bằng sự tử tế · Một ngụm an yên</div>', unsafe_allow_html=True)
+        st.markdown('<div class="nav-brand">MỘC CAFÉ</div><div class="nav-sub">Pha bằng sự tử tế · Một ngụm an yên</div>', unsafe_allow_html=True)
     with menu:
         cols = st.columns(5)
         nav_items = [
@@ -128,23 +139,36 @@ def show_home():
 
 def show_shop():
     st.markdown("# Thực đơn")
-    st.markdown("Chọn món yêu thích — có thể điều chỉnh số lượng trong giỏ hàng.")
-    search = st.text_input("🔎 Tìm món", placeholder="Ví dụ: latte, cold brew…")
+    st.markdown("Chọn món, tùy chỉnh size, topping và ghi chú riêng cho từng ly.")
+    search = st.text_input("Tìm món", placeholder="Ví dụ: latte, trà sữa, trà quýt…")
     products = [p for p in PRODUCTS if search.lower() in p["name"].lower()] if search else PRODUCTS
     for start in range(0, len(products), 3):
         cols = st.columns(3, gap="medium")
         for col, p in zip(cols, products[start:start+3]):
             with col:
                 st.markdown('<div class="product">', unsafe_allow_html=True)
-                st.image(p["image"], use_container_width=True)
-                st.markdown(f'<div class="tag">{p["tag"]}</div><div class="product-name">{p["name"]}</div><div class="product-sub">{p["subtitle"]}</div><div class="price">{money(p["price"])}</div>', unsafe_allow_html=True)
-                qty = st.number_input("Số lượng", min_value=0, max_value=30, value=st.session_state.cart.get(p["id"], 0), key=f"qty_{p['id']}")
+                image_url = p["image"]
+                if image_url and image_url != "[GẮN LINK ẢNH]":
+                    st.image(image_url, use_container_width=True)
+                else:
+                    st.markdown('<div style="height:170px;border-radius:12px;background:#eee3d2;display:flex;align-items:center;justify-content:center;color:#665344;font-weight:700;letter-spacing:.04em;">GẮN LINK ẢNH</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="tag">{p["tag"]}</div><div class="product-name">{p["name"]}</div><div class="product-sub">{p["subtitle"]}</div><div class="price">Từ {money(p["price"])}</div>', unsafe_allow_html=True)
+                size = st.radio("Size ly", ["L", "XL (+10.000₫)"], horizontal=True, key=f"size_{p['id']}")
+                toppings_options = ["Trân châu trắng (+7.000₫)", "Trân châu đen (+7.000₫)", "Kem trứng (+12.000₫)", "Thạch (+7.000₫)"]
+                toppings = st.multiselect("Topping", toppings_options, key=f"tops_{p['id']}", placeholder="Không topping")
+                note = st.text_input("Ghi chú cho ly này", key=f"note_{p['id']}", placeholder="Ví dụ: 30% đường, ít đá…")
+                qty = st.number_input("Số lượng", min_value=1, max_value=30, value=1, key=f"qty_{p['id']}")
                 if st.button("Thêm vào giỏ", key=f"add_{p['id']}", use_container_width=True):
-                    if qty:
-                        st.session_state.cart[p["id"]] = int(qty)
+                    size_code = "XL" if size.startswith("XL") else "L"
+                    topping_price = sum(12000 if "Kem trứng" in t else 7000 for t in toppings)
+                    unit_price = p["price"] + (10000 if size_code == "XL" else 0) + topping_price
+                    variant_key = f"{p['id']}|{size_code}|{'~'.join(toppings)}|{note.strip()}"
+                    existing = st.session_state.cart.get(variant_key)
+                    if existing:
+                        existing["quantity"] += int(qty)
                     else:
-                        st.session_state.cart.pop(p["id"], None)
-                    st.toast(f"Đã cập nhật {p['name']} trong giỏ")
+                        st.session_state.cart[variant_key] = {"product_id":p["id"],"name":p["name"],"quantity":int(qty),"size":size_code,"toppings":list(toppings),"note":note.strip(),"unit_price":unit_price}
+                    st.toast(f"Đã thêm {p['name']} size {size_code} vào giỏ")
                 st.markdown('</div>', unsafe_allow_html=True)
     st.write("")
     if st.button("Xem giỏ hàng →"):
@@ -152,7 +176,7 @@ def show_shop():
         st.rerun()
 
 def cart_lines():
-    return [(p, int(st.session_state.cart.get(p["id"], 0))) for p in PRODUCTS if int(st.session_state.cart.get(p["id"], 0)) > 0]
+    return list(st.session_state.cart.items())
 
 def show_cart():
     st.markdown("# Giỏ hàng & thanh toán")
@@ -163,18 +187,21 @@ def show_cart():
             st.session_state.page = "shop"
             st.rerun()
         return
-    for p, qty in lines:
-        row = st.columns([2.5, 1, 1, 1])
-        row[0].markdown(f"**{p['name']}**  \n{money(p['price'])}/ly")
-        row[1].write(f"× {qty}")
-        row[2].markdown(f"**{money(p['price'] * qty)}**")
+    for item_key, item in lines:
+        row = st.columns([3, 1, 1, 1])
+        details = f"Size {item['size']}"
+        if item["toppings"]: details += " · " + ", ".join(t.split(" (+")[0] for t in item["toppings"])
+        if item["note"]: details += f" · Ghi chú: {item['note']}"
+        row[0].markdown(f"**{item['name']}** · {details}  \n{money(item['unit_price'])}/ly")
+        row[1].write(f"× {item['quantity']}")
+        row[2].markdown(f"**{money(item['unit_price'] * item['quantity'])}**")
         with row[3]:
-            if st.button("Bỏ", key=f"remove_{p['id']}"):
-                st.session_state.cart.pop(p["id"], None)
+            if st.button("Bỏ", key=f"remove_{hashlib.md5(item_key.encode()).hexdigest()[:10]}"):
+                st.session_state.cart.pop(item_key, None)
                 st.rerun()
-    subtotal = sum(p["price"] * qty for p, qty in lines)
+    subtotal = sum(item["unit_price"] * item["quantity"] for _, item in lines)
     st.divider()
-    a, b = st.columns([2, 1])
+    _, b = st.columns([2, 1])
     with b:
         st.markdown(f"**Tạm tính**  \n# {money(subtotal)}")
         st.caption("Phí giao hàng, thuế và típ (nếu có) sẽ được xác nhận theo chính sách cửa hàng.")
@@ -186,8 +213,7 @@ def show_cart():
         payment = st.radio("Phương thức thanh toán", ["Thanh toán khi nhận hàng (COD)", "Chuyển khoản / thanh toán trực tuyến (demo)"], index=0)
         tip = st.selectbox("Típ cho nhân viên (không bắt buộc)", ["Không", "10.000₫", "20.000₫", "Khác"])
         tip_value = {"Không": 0, "10.000₫": 10000, "20.000₫": 20000, "Khác": 0}[tip]
-        if tip == "Khác":
-            tip_value = st.number_input("Số tiền típ (₫)", min_value=0, max_value=1000000, step=5000, value=0)
+        if tip == "Khác": tip_value = st.number_input("Số tiền típ (₫)", min_value=0, max_value=1000000, step=5000, value=0)
         agreed = st.checkbox("Tôi xác nhận thông tin đơn hàng là chính xác.")
         submitted = st.form_submit_button("Đặt hàng", type="primary", use_container_width=True)
     if submitted:
@@ -197,27 +223,9 @@ def show_cart():
             st.error("Vui lòng xác nhận thông tin đơn hàng.")
         else:
             total = subtotal + int(tip_value)
-            order = {
-                "order_id": datetime.now().strftime("MC%y%m%d%H%M%S"),
-                "created_at": datetime.now().isoformat(timespec="seconds"),
-                "customer": name.strip(),
-                "address": address.strip(),
-                "contact": contact.strip(),
-                "payment_method": payment,
-                "payment_status": "Chờ thanh toán khi nhận" if payment.startswith("Thanh toán khi") else "Chưa thanh toán — demo",
-                "items": [{"name": p["name"], "quantity": qty, "unit_price": p["price"], "line_total": p["price"] * qty} for p, qty in lines],
-                "subtotal": subtotal,
-                "tip": int(tip_value),
-                "total": total,
-                "status": "Mới nhận",
-            }
-            orders = load_orders()
-            orders.append(order)
-            save_orders(orders)
-            st.session_state.cart = {}
-            st.session_state.order_notice = order["order_id"]
-            st.session_state.page = "confirmation"
-            st.rerun()
+            order = {"order_id":datetime.now().strftime("MC%y%m%d%H%M%S"),"created_at":datetime.now().isoformat(timespec="seconds"),"customer":name.strip(),"address":address.strip(),"contact":contact.strip(),"payment_method":payment,"payment_status":"Chờ thanh toán khi nhận" if payment.startswith("Thanh toán khi") else "Chưa thanh toán — demo","items":[{"name":item["name"],"quantity":item["quantity"],"size":item["size"],"toppings":item["toppings"],"note":item["note"],"unit_price":item["unit_price"],"line_total":item["unit_price"]*item["quantity"]} for _,item in lines],"subtotal":subtotal,"tip":int(tip_value),"total":total,"status":"Mới nhận"}
+            orders=load_orders(); orders.append(order); save_orders(orders)
+            st.session_state.cart={}; st.session_state.order_notice=order["order_id"]; st.session_state.page="confirmation"; st.rerun()
 
 def show_confirmation():
     st.success("Đã ghi nhận đơn hàng!")
@@ -266,7 +274,9 @@ def show_admin():
             st.write(f"**Thanh toán:** {order['payment_method']} — {order['payment_status']}")
             st.write("**Món:**")
             for item in order["items"]:
-                st.write(f"- {item['name']} × {item['quantity']} — {money(item['line_total'])}")
+                st.write(f"- {item['name']} · size {item.get('size', 'L')} × {item['quantity']} — {money(item['line_total'])}")
+                if item.get("toppings"): st.caption("Topping: " + ", ".join(t.split(" (+")[0] for t in item["toppings"]))
+                if item.get("note"): st.caption("Ghi chú: " + item["note"])
             st.write(f"**Tạm tính:** {money(order['subtotal'])} · **Típ:** {money(order['tip'])} · **Tổng:** {money(order['total'])}")
             index = statuses.index(order["status"]) if order["status"] in statuses else 0
             new_status = st.selectbox("Cập nhật trạng thái", statuses, index=index, key=f"status_{order['order_id']}")
@@ -315,8 +325,6 @@ def show_split():
     bills_10 = remainder // 10000
     remainder = remainder % 10000
     bills_1 = remainder // 1000
-    binary_people = bin(int(people))
-    hex_people = hex(int(people))
 
     with result_col:
         st.markdown(f"### 02 · Kết quả — {group_name or 'Nhóm của bạn'}")
@@ -369,10 +377,10 @@ elif st.session_state.page == "confirmation":
 
 st.markdown("""
 <div class="site-footer">
-  <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#4b2e23;">☕ MỘC CAFÉ</div>
+  <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#4b2e23;">MỘC CAFÉ</div>
   <div style="margin-top:.35rem;">Pha bằng sự tử tế · Cà phê ngon, khoảnh khắc lành.</div>
   <div style="height:1px;background:#ddcbb5;margin:.85rem 0;"></div>
   <div style="font-size:.82rem;">Thực đơn · Đặt hàng · Tiện ích chia tiền nhóm</div>
-  <div style="font-size:.78rem;color:#857362;margin-top:.25rem;">Hình ảnh minh họa từ Unsplash. Thanh toán trực tuyến hiện là chế độ demo.</div>
+  <div style="font-size:.78rem;color:#857362;margin-top:.25rem;">Vui lòng thay [GẮN LINK ẢNH] bằng đường dẫn ảnh món nước. Thanh toán trực tuyến hiện là chế độ demo.</div>
 </div>
 """, unsafe_allow_html=True)
